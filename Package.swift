@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.2
 //
 //  Package.swift
 //  PerfectLib
@@ -26,7 +26,7 @@ let package = Package(
 	products: [
 		.library(name: "PerfectLib", targets: ["PerfectLib"])
 	],
-	dependencies: [.package(url: "https://github.com/PerfectlySoft/Perfect-LinuxBridge.git", from: "3.0.0")],
+    dependencies: [.package(url: "https://github.com/123FLO321/Perfect-LinuxBridge.git", .branch("swift5"))],
 	targets: [
 		.target(name: "PerfectLib", dependencies: ["LinuxBridge"]),
 		.testTarget(name: "PerfectLibTests", dependencies: ["PerfectLib"])

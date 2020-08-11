@@ -271,53 +271,6 @@ extension Bool: JSONConvertible {
     }
 }
 
-// !FIX! Downcasting to protocol does not work on Linux
-// Not sure if this is intentional, or a bug.
-func jsonEncodedStringWorkAround(_ o: Any) throws -> String {
-    switch o {
-    case let jsonAble as JSONConvertibleObject: // as part of Linux work around
-        return try jsonAble.jsonEncodedString()
-    case let jsonAble as JSONConvertible:
-        return try jsonAble.jsonEncodedString()
-    case let jsonAble as String:
-        return try jsonAble.jsonEncodedString()
-    case let jsonAble as Int:
-        return try jsonAble.jsonEncodedString()
-    case let jsonAble as Int8:
-        return try jsonAble.jsonEncodedString()
-    case let jsonAble as Int16:
-        return try jsonAble.jsonEncodedString()
-    case let jsonAble as Int32:
-        return try jsonAble.jsonEncodedString()
-    case let jsonAble as Int64:
-        return try jsonAble.jsonEncodedString()
-    case let jsonAble as UInt:
-        return try jsonAble.jsonEncodedString()
-    case let jsonAble as UInt8:
-        return try jsonAble.jsonEncodedString()
-    case let jsonAble as UInt16:
-        return try jsonAble.jsonEncodedString()
-    case let jsonAble as UInt32:
-        return try jsonAble.jsonEncodedString()
-    case let jsonAble as UInt64:
-        return try jsonAble.jsonEncodedString()
-    case let jsonAble as Double:
-        return try jsonAble.jsonEncodedString()
-    case let jsonAble as Float:
-        return try jsonAble.jsonEncodedString()
-    case let jsonAble as Bool:
-        return try jsonAble.jsonEncodedString()
-    case let jsonAble as [Any]:
-        return try jsonAble.jsonEncodedString()
-    case let jsonAble as [[String:Any]]:
-        return try jsonAble.jsonEncodedString()
-    case let jsonAble as [String:Any]:
-        return try jsonAble.jsonEncodedString()
-    default:
-        throw JSONConversionError.notConvertible(o)
-    }
-}
-
 extension Array: JSONConvertible {
     /// Convert an Array into JSON text.
     public func jsonEncodedString() throws -> String {
@@ -329,7 +282,7 @@ extension Array: JSONConvertible {
             } else {
                 first = false
             }
-            s.append(try jsonEncodedStringWorkAround(v))
+            s.append(try (v as! JSONConvertible).jsonEncodedString())
         }
         s.append("]")
         return s
@@ -352,7 +305,7 @@ extension Dictionary: JSONConvertible {
             }
             s.append(try strKey.jsonEncodedString())
             s.append(":")
-            s.append(try jsonEncodedStringWorkAround(v))
+            s.append(try (v as! JSONConvertible).jsonEncodedString())
         }
         s.append("}")
         return s

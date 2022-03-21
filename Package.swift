@@ -26,7 +26,7 @@ let package = Package(
 	products: [
 		.library(name: "PerfectLib", targets: ["PerfectLib"])
 	],
-    dependencies: [.package(name: "LinuxBridge", url: "https://github.com/123FLO321/Perfect-LinuxBridge.git", .branch("swift5"))],
+    dependencies: [.package(name: "LinuxBridge", url: "https://github.com/SkOODaT/Perfect-LinuxBridge.git", .branch("SKOODAT"))],
 	targets: [
 		.target(name: "PerfectLib", dependencies: ["LinuxBridge"]),
 		.testTarget(name: "PerfectLibTests", dependencies: ["PerfectLib"])
